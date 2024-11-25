@@ -1,4 +1,4 @@
-import { Heading, SimpleGrid, Box } from "@chakra-ui/react";
+import { Heading, SimpleGrid, Box, Container } from "@chakra-ui/react";
 import React from "react";
 import "../styles/Flights.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,43 +15,66 @@ const Flights = () => {
     },
     {
       name: "Singapore Airlines",
-      logo: "https://logos-world.net/wp-content/uploads/2020/03/Singapore-Airlines-Logo.png",
+      logo: "https://1000logos.net/wp-content/uploads/2020/04/Singapore-Airlines-Logo-1.png",
       description: "Award-winning service across Asia and beyond"
     },
     {
       name: "Emirates",
-      logo: "https://logos-world.net/wp-content/uploads/2020/03/Emirates-Logo.png",
+      logo: "https://1000logos.net/wp-content/uploads/2017/08/Emirates-Logo.png",
       description: "Connecting Asia through Dubai"
     },
     {
       name: "Korean Air",
-      logo: "https://logos-world.net/wp-content/uploads/2020/03/Korean-Air-Logo.png",
+      logo: "https://1000logos.net/wp-content/uploads/2020/04/Korean-Air-Logo.png",
       description: "Your gateway to South Korea"
     },
     {
       name: "Japan Airlines",
-      logo: "https://logos-world.net/wp-content/uploads/2020/03/Japan-Airlines-Logo.png",
+      logo: "https://1000logos.net/wp-content/uploads/2021/11/Japan-Airlines-Logo.png",
       description: "Experience Japanese hospitality in the sky"
     }
   ];
 
   return (
-    <div id="flights">
-      <div className="flights-header">
+    <Container maxW="container.xl" id="flights">
+      <Box className="flights-header" mb={10}>
         <Heading>Our Partner Airlines</Heading>
         <p>We work with the world's leading airlines to get you to your destination</p>
-      </div>
+      </Box>
 
-      <SimpleGrid columns={[1, 2, 3]} spacing={6} maxW="1200px" mx="auto">
+      <SimpleGrid 
+        columns={{ base: 1, md: 2, lg: 3 }} 
+        spacing={8} 
+        px={{ base: 4, md: 6 }}
+      >
         {airlines.map((airline, index) => (
-          <Box key={index} className="airline-card">
-            <img src={airline.logo} alt={airline.name} />
-            <h3>{airline.name}</h3>
+          <Box 
+            key={index} 
+            className="airline-card"
+            bg="white"
+            p={6}
+            borderRadius="lg"
+            boxShadow="md"
+            transition="all 0.3s"
+            _hover={{ transform: 'translateY(-5px)', boxShadow: 'lg' }}
+          >
+            <Box height="80px" mb={4}>
+              <img 
+                src={airline.logo} 
+                alt={airline.name}
+                style={{ 
+                  height: '100%', 
+                  width: 'auto',
+                  objectFit: 'contain'
+                }}
+              />
+            </Box>
+            <Heading size="md" mb={3}>{airline.name}</Heading>
             <p>{airline.description}</p>
           </Box>
         ))}
       </SimpleGrid>
-    </div>
+    </Container>
   );
 };
 
