@@ -6,87 +6,73 @@ import axios from "axios";
 import Loader from "./Loader";
 
 const Holidays = () => {
-  const [placesData, setPlacesData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const [placesData, setPlacesData] = useState([
+    {
+      placeName: "Bangkok, Thailand",
+      imageURL: "https://images.unsplash.com/photo-1583417319070-4a69db38a482",
+      tripDuration: "5-7 Days",
+      price: "Contact for Best Price",
+      description: "Experience the vibrant street life and temples of Bangkok"
+    },
+    {
+      placeName: "Phuket, Thailand",
+      imageURL: "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5",
+      tripDuration: "4-6 Days",
+      price: "Contact for Best Price",
+      description: "Relax on pristine beaches and explore island life"
+    },
+    {
+      placeName: "Chiang Mai, Thailand",
+      imageURL: "https://images.unsplash.com/photo-1598127754413-c9a8d2a7f6af",
+      tripDuration: "3-5 Days",
+      price: "Contact for Best Price",
+      description: "Discover ancient temples and traditional culture"
+    },
+    // Add more destinations as needed
+  ]);
 
-  useEffect(() => {
-    const fetchPlaceData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(`${apiUrl}/places`);
-        if (response.data && Array.isArray(response.data)) {
-          setPlacesData(response.data.slice(0, 3));
-        } else {
-          setPlacesData([]);
-          setError('Data received is not in the expected format');
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setError('Failed to fetch data');
-        setPlacesData([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPlaceData();
-  }, [apiUrl]);
+  const navigate = useNavigate();
 
   const handleBook = (place) => {
-    const userData = JSON.stringify(place);
-    localStorage.setItem("currentData", userData);
-    navigate("/hotels");
+    navigate("/contact", { state: { destination: place.placeName } });
   };
 
-  if (loading) return <Loader />;
-  if (error) return <div>Error: {error}</div>;
-  
   return (
     <div id="holidays">
       <div id="text">
-        <Heading>Find Popular Destinations</Heading>
+        <Heading>Discover Thailand's Best Destinations</Heading>
         <div className="desc">
           <p>
-            Escape the ordinary and explore the extraordinary - with our
-            handpicked selection of destinations and travel deals, you will
-            be able to create the trip of your dreams.
+            Experience the magic of Thailand with our customized tour packages.
+            Contact us for personalized itineraries and the best prices.
           </p>
         </div>
-
-        <Button id="Explore">
-          <Link to="/destinations">Explore More </Link>
-        </Button>
       </div>
       <div id="holidaysContainer">
-        {placesData.length > 0 ? (
-          placesData.map((place) => (
-            <div className="box" key={place.placeName}>
-              <div className="holidayImage">
-                <img src={place.imageURL} alt={place.placeName} />
-              </div>
-              <div className="content">
-                <Heading>{place.placeName}</Heading>
-                <h2>{place.tripDuration}</h2>
-                <div className="bookingBox">
-                  <div className="priceBox">
-                    <span id="starts">Starts from</span>
-                    <span id="price">${place.price} / person</span>
-                  </div>
-                  <Button
-                    id="btn"
-                    onClick={() => handleBook(place)}
-                  >
-                    Book
-                  </Button>
+        {placesData.map((place) => (
+          <div className="box" key={place.placeName}>
+            <div className="holidayImage">
+              <img src={place.imageURL} alt={place.placeName} />
+            </div>
+            <div className="content">
+              <Heading size="md">{place.placeName}</Heading>
+              <h2>{place.tripDuration}</h2>
+              <p>{place.description}</p>
+              <div className="bookingBox">
+                <div className="priceBox">
+                  <span id="price">{place.price}</span>
                 </div>
+                <Button
+                  id="btn"
+                  colorScheme="teal"
+                  onClick={() => handleBook(place)}
+                >
+                  Contact Us
+                </Button>
               </div>
             </div>
-          ))
-        ) : (
-          <div>No destinations available</div>
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );

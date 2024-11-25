@@ -1,18 +1,20 @@
 import { Button, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
 import "../styles/Contact.css";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import mountain from "../assets/mountain.jpg";
+import { useLocation } from "react-router-dom";
 
 const Contact = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [message, setMessage] = useState("");
-  // const toast = useToast();
+  const location = useLocation();
+  const destination = location.state?.destination;
+
   const handleSubmit = () => {
-    if (email === "" || mobile === "" || message === "") {
+    if (email === "" || mobile === "" || message === "" || name === "") {
       toast.error(`Please fill in all required fields.😕`, {
         position: "top-right",
         autoClose: 5000,
@@ -25,79 +27,66 @@ const Contact = () => {
       });
       return;
     }
+
+    // Here you would typically send this to your backend
     const payload = {
+      name,
       email,
       mobile,
       message,
+      destination
     };
-    console.log(payload);
-    const apiUrl = process.env.REACT_APP_API_URL;
 
-    fetch(`${apiUrl}/messages/create`, {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(payload),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
+    // Show success message
+    toast.success(`Thank you for your inquiry! We'll contact you soon.`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
 
-        toast.success(`Thanks for contacting us! 😊 We'll be in touch soon!`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-        setEmail("");
-        setMobile("");
-        setMessage("");
-      })
-
-      .then((err) => console.log(err));
+    // Clear form
+    setName("");
+    setEmail("");
+    setMobile("");
+    setMessage("");
   };
 
   return (
     <div id="contact">
-      <div className="contactContainer">
-        <img
-          id="contactImg"
-          src={mountain}
-          // src="https://www.whitespidermedia.com/_nuxt/img/196e79f.jpg"
-          alt=""
-        />
-
-        <div id="contactText">
-          <Heading>Get in touch</Heading>
-          <div className="textText">
-            <div className="desc">
-              <p>
-                Don't wait, reach out to us now and let us help you plan your
-                next vacation. Our dedicated team is always here to answer your
-                questions and make your travel dreams a reality.
-              </p>
-            </div>
-          </div>
-          <div className="contactInfo">
+      <div className="contactForm">
+        <Heading>Contact Us</Heading>
+        {destination && (
+          <p className="inquiry-destination">
+            Inquiry about: {destination}
+          </p>
+        )}
+        <div className="formInputs">
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <div className="row">
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
             <input
-              type="number"
+              type="tel"
               placeholder="Mobile"
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
             />
           </div>
-          <input
-            type="text"
+          <textarea
             placeholder="Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -106,18 +95,7 @@ const Contact = () => {
         <Button id="btn" onClick={handleSubmit}>
           Send
         </Button>
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
+        <ToastContainer />
       </div>
     </div>
   );

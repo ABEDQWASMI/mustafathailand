@@ -29,6 +29,13 @@
   padding: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 20px;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.box:hover {
+  transform: translateY(-5px);
 }
 .bookingBox {
   display: flex;
@@ -67,6 +74,27 @@
   margin-bottom: -15px;
   color: white;
   background-color: green;
+}
+.holidayImage img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+.content {
+  padding: 1.5rem;
+}
+.description {
+  margin: 1rem 0;
+  color: #666;
+}
+.price {
+  font-weight: bold;
+  color: #2c5282;
+}
+.inquiry-destination {
+  color: #2c5282;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 @media only Screen and (max-width: 1020px) {
