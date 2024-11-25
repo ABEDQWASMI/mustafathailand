@@ -51,7 +51,7 @@ const Holidays = () => {
     },
     {
       placeName: "Seoul, South Korea",
-      imageURL: "https://images.unsplash.com/photo-1538485399081-7c8ed7c189c7",
+      imageURL: "https://images.unsplash.com/photo-1617541086271-4d43983704b8",
       tripDuration: "6-8 Days",
       price: "Contact for Best Price",
       description: "Experience K-culture and modern Asian lifestyle"
@@ -65,7 +65,7 @@ const Holidays = () => {
     },
     {
       placeName: "Hanoi, Vietnam",
-      imageURL: "https://images.unsplash.com/photo-1509030841596-171416c9b753",
+      imageURL: "https://images.unsplash.com/photo-1557750255-c76072a7aad1",
       tripDuration: "4-6 Days",
       price: "Contact for Best Price",
       description: "Explore ancient streets and Vietnamese cuisine"
@@ -79,7 +79,7 @@ const Holidays = () => {
     },
     {
       placeName: "Siem Reap, Cambodia",
-      imageURL: "https://images.unsplash.com/photo-1600820013464-5eb5f98f8ad3",
+      imageURL: "https://images.unsplash.com/photo-1600111765736-e1d9f4814790",
       tripDuration: "3-5 Days",
       price: "Contact for Best Price",
       description: "Explore ancient Angkor temples and Khmer culture"
