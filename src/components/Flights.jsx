@@ -1,11 +1,13 @@
 import { Heading, SimpleGrid, Box, Container } from "@chakra-ui/react";
 import React from "react";
 import "../styles/Flights.css";
-// Import the images
-import emiratesLogo from "../assets/emirates-logo.png";
-import koreanAirLogo from "../assets/korean-air-logo.jpg";
-import japanAirlinesLogo from "../assets/japan-airlines-logo.png";
-import thaiAirwaysLogo from "../assets/avgazs7a1.webp";
+
+// Import images with exact filenames
+import thaiAirways from "../assets/images/11.png";
+import singaporeAirlines from "../assets/10.png";
+import emirates from "../assets/png-clipart-emirates-logo-dubai-airbus-a380-emirates-airline-logo-dubai-text-american-airlines-thumbnail.png";
+import koreanAir from "../assets/kisspng-korean-air-logo-airline-mactancebu-internationa-5b74cc53041123.6109000915343811390167.jpg";
+import japanAirlines from "../assets/png-clipart-jal-japan-airlines-logo-japan-airlines-logo-icons-logos-emojis-iconic-brands-thumbnail.png";
 
 const Flights = () => {
   const airlines = [
