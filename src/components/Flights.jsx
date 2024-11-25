@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/react";
+import { Heading, SimpleGrid, Box } from "@chakra-ui/react";
 import React from "react";
 import "../styles/Flights.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -42,40 +42,15 @@ const Flights = () => {
         <p>We work with the world's leading airlines to get you to your destination</p>
       </div>
 
-      <Swiper
-        modules={[Autoplay, Navigation]}
-        spaceBetween={30}
-        slidesPerView={3}
-        navigation
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        breakpoints={{
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 20
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 30
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30
-          }
-        }}
-      >
+      <SimpleGrid columns={[1, 2, 3]} spacing={6} maxW="1200px" mx="auto">
         {airlines.map((airline, index) => (
-          <SwiperSlide key={index}>
-            <div className="airline-card">
-              <img src={airline.logo} alt={airline.name} />
-              <h3>{airline.name}</h3>
-              <p>{airline.description}</p>
-            </div>
-          </SwiperSlide>
+          <Box key={index} className="airline-card">
+            <img src={airline.logo} alt={airline.name} />
+            <h3>{airline.name}</h3>
+            <p>{airline.description}</p>
+          </Box>
         ))}
-      </Swiper>
+      </SimpleGrid>
     </div>
   );
 };
