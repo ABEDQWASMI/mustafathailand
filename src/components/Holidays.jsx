@@ -7,23 +7,29 @@ import Loader from "./Loader";
 
 const Holidays = () => {
   const [placesData, setPlacesData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    // Fetch all places initially
-    const fetchPlaceData = () => {
-      setLoading(true);
-      axios
-        .get(`${apiUrl}/places`)
-        .then((response) => {
+    const fetchPlaceData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${apiUrl}/places`);
+        if (response.data && Array.isArray(response.data)) {
           setPlacesData(response.data.slice(0, 3));
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        })
-        .finally(setLoading(false));
+        } else {
+          setPlacesData([]);
+          setError('Data received is not in the expected format');
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError('Failed to fetch data');
+        setPlacesData([]);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchPlaceData();
   }, [apiUrl]);
@@ -33,6 +39,10 @@ const Holidays = () => {
     localStorage.setItem("currentData", userData);
     navigate("/hotels");
   };
+
+  if (loading) return <Loader />;
+  if (error) return <div>Error: {error}</div>;
+  
   return (
     <div id="holidays">
       <div id="text">
@@ -40,7 +50,7 @@ const Holidays = () => {
         <div className="desc">
           <p>
             Escape the ordinary and explore the extraordinary - with our
-            handpicked selection of destinatations and travel deails. you will
+            handpicked selection of destinations and travel deals, you will
             be able to create the trip of your dreams.
           </p>
         </div>
@@ -50,9 +60,7 @@ const Holidays = () => {
         </Button>
       </div>
       <div id="holidaysContainer">
-        {loading ? (
-          <Loader />
-        ) : (
+        {placesData.length > 0 ? (
           placesData.map((place) => (
             <div className="box" key={place.placeName}>
               <div className="holidayImage">
@@ -68,9 +76,7 @@ const Holidays = () => {
                   </div>
                   <Button
                     id="btn"
-                    onClick={() => {
-                      handleBook(place);
-                    }}
+                    onClick={() => handleBook(place)}
                   >
                     Book
                   </Button>
@@ -78,6 +84,8 @@ const Holidays = () => {
               </div>
             </div>
           ))
+        ) : (
+          <div>No destinations available</div>
         )}
       </div>
     </div>
