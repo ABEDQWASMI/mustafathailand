@@ -1,10 +1,6 @@
 import { Heading, SimpleGrid, Box, Container } from "@chakra-ui/react";
 import React from "react";
 import "../styles/Flights.css";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
 
 const Flights = () => {
   const airlines = [
