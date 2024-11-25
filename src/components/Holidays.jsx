@@ -23,7 +23,8 @@ const Holidays = () => {
     },
     {
       placeName: "Chiang Mai, Thailand",
-      imageURL: "https://images.unsplash.com/photo-1598127754413-c9a8d2a7f6af",
+      imageURL: "https://images.unsplash.com/photo-1599284223190-c4b1f644c13b?q=80&w=1000",
+      backupImageURL: "https://images.unsplash.com/photo-1586931775007-a530539c1f3c",
       tripDuration: "3-5 Days",
       price: "Contact for Best Price",
       description: "Discover ancient temples and traditional culture"

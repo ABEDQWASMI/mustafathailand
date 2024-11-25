@@ -10,6 +10,7 @@ import Login from "../components/Login";
 import Booking from "../components/Booking";
 import Details from "../components/Details";
 import Success from "../components/Success";
+import Contact from "../components/Contact";
 
 const AllRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const AllRoutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
   );
