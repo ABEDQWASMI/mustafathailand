@@ -1,32 +1,37 @@
 import { Heading, SimpleGrid, Box, Container } from "@chakra-ui/react";
 import React from "react";
 import "../styles/Flights.css";
+// Import the images
+import emiratesLogo from "../assets/emirates-logo.png";
+import koreanAirLogo from "../assets/korean-air-logo.jpg";
+import japanAirlinesLogo from "../assets/japan-airlines-logo.png";
+import thaiAirwaysLogo from "../assets/avgazs7a1.webp";
 
 const Flights = () => {
   const airlines = [
     {
       name: "Thai Airways",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Thai_Airways_Logo.svg/2560px-Thai_Airways_Logo.svg.png",
+      logo: thaiAirways,
       description: "Thailand's flag carrier with extensive Asian network"
     },
     {
       name: "Singapore Airlines",
-      logo: "https://1000logos.net/wp-content/uploads/2020/04/Singapore-Airlines-Logo-1.png",
+      logo: singaporeAirlines,
       description: "Award-winning service across Asia and beyond"
     },
     {
       name: "Emirates",
-      logo: "https://1000logos.net/wp-content/uploads/2017/08/Emirates-Logo.png",
+      logo: emirates,
       description: "Connecting Asia through Dubai"
     },
     {
       name: "Korean Air",
-      logo: "https://1000logos.net/wp-content/uploads/2020/04/Korean-Air-Logo.png",
+      logo: koreanAir,
       description: "Your gateway to South Korea"
     },
     {
       name: "Japan Airlines",
-      logo: "https://1000logos.net/wp-content/uploads/2021/11/Japan-Airlines-Logo.png",
+      logo: japanAirlines,
       description: "Experience Japanese hospitality in the sky"
     }
   ];
@@ -54,14 +59,14 @@ const Flights = () => {
             transition="all 0.3s"
             _hover={{ transform: 'translateY(-5px)', boxShadow: 'lg' }}
           >
-            <Box height="80px" mb={4}>
+            <Box className="logo-container">
               <img 
                 src={airline.logo} 
                 alt={airline.name}
-                style={{ 
-                  height: '100%', 
-                  width: 'auto',
-                  objectFit: 'contain'
+                className="airline-logo"
+                onError={(e) => {
+                  console.error(`Failed to load image for ${airline.name}`);
+                  e.target.src = 'https://via.placeholder.com/200x100?text=Airline+Logo';
                 }}
               />
             </Box>
